@@ -1,0 +1,87 @@
+.form {
+    width: 700px;
+    background-color:black;
+    background-image:
+    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+    radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+.f3 {
+    font-size: 1.5rem;
+}
+
+.f4 {
+    font-size:1.25rem
+}
+
+.w-70 {
+    width: 70%;
+}
+
+.dib {
+    display: inline-block;
+}
+
+.white { 
+    color: #fff; 
+}
+
+.bg-light-purple { 
+    background-color: #a463f2; 
+}
+
+.grow {
+    -moz-osx-font-smoothing: grayscale; 
+    -webkit-backface-visibility: hidden; 
+    backface-visibility: hidden; 
+    -webkit-transform: translateZ( 0 ); 
+    transform: translateZ( 0 ); 
+    transition: -webkit-transform .25s ease-out; 
+    transition: transform .25s ease-out; 
+    transition: transform .25s ease-out, -webkit-transform .25s ease-out;
+}
+
+.pa4 { 
+    padding: 2rem; 
+}
+
+.br3 {
+    border-radius: .5rem;
+}
+
+.shadow-5 {
+    box-shadow:4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
+}
+
+.center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.w-30 {
+    width: 30%;
+}
+
+.link {
+    text-decoration: none;
+    transition: color .15s ease-in;
+}
+
+.pa2 { 
+    padding: .5rem; 
+}
+
+.ph3 { 
+    padding-left: 1rem; 
+    padding-right: 1rem; 
+}
+
+.pv2 { 
+    padding-top: .5rem; 
+    padding-bottom: .5rem; 
+}

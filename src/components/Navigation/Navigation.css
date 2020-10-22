@@ -1,0 +1,29 @@
+.f3 {
+    font-size: 1.5rem;
+}
+
+.link {
+    text-decoration: none;
+    transition: color .15s ease-in;
+}
+
+.dim {
+    opacity: 1;
+    transition: opacity .15s ease-in;
+}
+
+.black {
+    color: #000;
+}
+
+.underline { 
+    text-decoration: underline; 
+}
+
+.pa3 {
+    padding:1rem
+}
+
+.pointer:hover { 
+    cursor: pointer; 
+}

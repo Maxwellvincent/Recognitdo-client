@@ -1,0 +1,16 @@
+.center {
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.ma {
+    margin: 0px;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.mt2 {
+    margin-top: .5rem;
+}

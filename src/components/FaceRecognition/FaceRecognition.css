@@ -14,3 +14,18 @@
 .mt2 {
     margin-top: .5rem;
 }
+
+.bounding-box {
+    /* border: .2rem solid white; */
+    box-shadow: 0 0 0 3px #149df2 inset;
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+}

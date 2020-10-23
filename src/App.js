@@ -29,6 +29,25 @@ const particleOptions = {
 function App() {
   const [input, setInput] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [box, setBox] = useState({});
+
+  const calculateFaceLocation = (data) => {
+    const clarafaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('inputImage');
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+      leftCol: clarafaiFace.left_col * width,
+      topRow: clarafaiFace.top_row * height,
+      rightCol: width - (clarafaiFace.right_col * width),
+      bottomRow: height - (clarafaiFace.bottom_row * height)
+    }
+  }
+
+  const displayFaceBox = (box) => {
+    console.log(box)
+    setBox(box);
+  }
 
 
   const onInputChange = e => {
@@ -41,7 +60,10 @@ function App() {
       .predict(
         Clarifai.FACE_DETECT_MODEL,
         input)
-      .then(response => console.log(response.outputs[0].data.regions[0].region_info.bounding_box))
+      .then(response => {
+          displayFaceBox(calculateFaceLocation(response));
+          // console.log(response.outputs[0].data.regions[0].region_info.bounding_box)
+        })
       .catch(err => console.log(err))
   }
 
@@ -57,7 +79,7 @@ function App() {
       <ImageForm 
         onInputChange={onInputChange} 
         onSubmit={onSubmit}/>
-      <FaceRecognition imageUrl={imageUrl}/> 
+      <FaceRecognition box={box} imageUrl={imageUrl}/> 
     </div>
   );
 }

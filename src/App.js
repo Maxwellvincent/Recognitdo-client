@@ -68,6 +68,7 @@ function App() {
         Clarifai.FACE_DETECT_MODEL,
         input)
       .then(response => {
+        console.log(response)
           displayFaceBox(calculateFaceLocation(response));
           // console.log(response.outputs[0].data.regions[0].region_info.bounding_box)
         })

@@ -5,7 +5,7 @@ function ImageForm({ onInputChange, onSubmit }) {
     return (
         <div>
             <p className="f3">
-                {'This Magic brain will detect faces in your pictures.'}
+                {'This will detect a face in your picture.'}
             </p>
             <div className="center">
                 <div className="form center pa4 br3 shadow-5">

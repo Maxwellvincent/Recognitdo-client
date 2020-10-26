@@ -9,8 +9,10 @@ function ImageForm({ onInputChange, onSubmit }) {
             </p>
             <div className="center">
                 <div className="form center pa4 br3 shadow-5">
+                    <label htmlFor="user-img" style={{color: "white", padding: '.3rem'}}>Insert Image Url:</label>
                     <input 
                     className='f4 pa2 w-70 center' type="text"
+                    id="user-img"
                     onChange={onInputChange}
                     />
                     <button 

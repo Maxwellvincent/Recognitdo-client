@@ -11,7 +11,7 @@ import Register from './components/Register/Register'
 import config from './config';
 import './App.css';
 
-
+// Checking API
 
 const app = new Clarifai.App({
   // apiKey: '710e4185216f486dbfa1fa62118ae660'

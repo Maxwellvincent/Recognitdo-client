@@ -1,5 +1,5 @@
 import Clarifai from 'clarifai';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Nav from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageForm from './components/ImageForm/ImageForm';
@@ -38,6 +38,12 @@ function App() {
   const [route, setRoute] = useState('signin');
   const [isSignedIn, setIsSignedIn] = useState(false)
 
+  useEffect(() => {
+    fetch('http://localhost:3001')
+    .then(resp => resp.json())
+    .then(console.log)
+  })
+
   const calculateFaceLocation = (data) => {
     const clarafaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputImage');
@@ -50,6 +56,8 @@ function App() {
       bottomRow: height - (clarafaiFace.bottom_row * height)
     }
   }
+
+
 
   const displayFaceBox = (box) => {
     console.log(box)

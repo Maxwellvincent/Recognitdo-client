@@ -1,12 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Signin.css';
 
 const Signin = ({ onRouteChange }) => {
+    const [signInEmail, setSignInEmail] = useState('');
+    const [signInPassword, setSignInPassword] = useState('');
+
+    const onEmailChange = (e) => {
+        setSignInEmail(e.target.value);
+    }
+
+    const onPasswordChange = (e) => {
+        setSignInPassword(e.target.value);
+    }
+
+    const onSubmitSignIn = () => {
+        // run a fetch to server
+        fetch('http://localhost:3001/signin', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email: signInEmail,
+                password: signInPassword
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            if(data === 'success'){
+                onRouteChange('home')
+            }
+        })
+        console.log(signInEmail, signInPassword);
+        
+    }
 
     return (
+        //AS IS THE ENTER BUTTON DOESNT WORK ON SUBMIT BC ITS NOT FORM
         <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">
-                <form className="measure">
+                <section className="measure">
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f1 fw6 ph0 mh0">Sign In</legend>
                         <div className="mt3">
@@ -15,7 +46,8 @@ const Signin = ({ onRouteChange }) => {
                                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="email" 
                                 name="email-address"  
-                                id="email-address"    
+                                id="email-address"
+                                onChange={onEmailChange}    
                             />
                         </div>
                         <div className="mv3">
@@ -25,6 +57,7 @@ const Signin = ({ onRouteChange }) => {
                                 type="password" 
                                 name="password"  
                                 id="password"
+                                onChange={onPasswordChange}
                             />
                         </div>
                         </fieldset>
@@ -33,7 +66,7 @@ const Signin = ({ onRouteChange }) => {
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                                 type="submit" 
                                 value="Sign in"
-                                onClick={() => onRouteChange('home')}
+                                onClick={onSubmitSignIn}
                             />
                         </div>
                         <div className="lh-copy mt3">
@@ -41,7 +74,7 @@ const Signin = ({ onRouteChange }) => {
                                 className="f6 link dim black db pointer">Register</p>
                             
                         </div>
-                </form>
+                </section>
             </main>
         </article>
         

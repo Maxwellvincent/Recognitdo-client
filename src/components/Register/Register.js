@@ -1,6 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Register = ({ onRouteChange }) => {
+const Register = ({ onRouteChange, loadUser }) => {
+    const [registerEmail, setRegisterEmail] = useState('');
+    const [registerPassword, setRegisterPassword] = useState('');
+    const [registerName, setRegisterName] = useState('');
+
+    const onEmailChange = (e) => {
+        setRegisterEmail(e.target.value);
+    }
+
+    const onNameChange = (e) => {
+        setRegisterName(e.target.value);
+    }
+
+    const onPasswordChange = (e) => {
+        setRegisterPassword(e.target.value);
+    }
+
+    const onSubmitRegister = (e) => {
+        e.preventDefault();
+        // run a fetch to server
+        fetch('http://localhost:3001/register', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email: registerEmail,
+                password: registerPassword,
+                name: registerName
+            })
+        })
+        .then(resp => resp.json())
+        .then(user => {
+            if(user){
+                console.log(user);
+                loadUser(user);
+                onRouteChange('home')
+            }
+        })
+        console.log(registerName, registerPassword, registerEmail);
+        
+    }
 
     return (
         <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -14,7 +53,8 @@ const Register = ({ onRouteChange }) => {
                                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="text" 
                                 name="name"  
-                                id="name"    
+                                id="name"
+                                onChange={onNameChange}    
                             />
                         </div>
                         <div className="mt3">
@@ -23,7 +63,8 @@ const Register = ({ onRouteChange }) => {
                                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="email" 
                                 name="email-address"  
-                                id="email-address"    
+                                id="email-address"
+                                onChange={onEmailChange}    
                             />
                         </div>
                         <div className="mv3">
@@ -33,6 +74,7 @@ const Register = ({ onRouteChange }) => {
                                 type="password" 
                                 name="password"  
                                 id="password"
+                                onChange={onPasswordChange}
                             />
                         </div>
                         </fieldset>
@@ -41,7 +83,7 @@ const Register = ({ onRouteChange }) => {
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                                 type="submit" 
                                 value="Register"
-                                onClick={onRouteChange('register')}
+                                onClick={onSubmitRegister}
                             />
                         </div>
                         {/* <div className="lh-copy mt3">

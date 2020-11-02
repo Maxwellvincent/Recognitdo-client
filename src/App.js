@@ -36,7 +36,14 @@ function App() {
   const [imageUrl, setImageUrl] = useState('');
   const [box, setBox] = useState({});
   const [route, setRoute] = useState('signin');
-  const [isSignedIn, setIsSignedIn] = useState(false)
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [user, setUser] = useState({
+            id: '',
+            name: '',
+            email: '',
+            entries: 0,
+            joined: ''
+  });
 
   useEffect(() => {
     fetch('http://localhost:3001')
@@ -57,8 +64,6 @@ function App() {
     }
   }
 
-
-
   const displayFaceBox = (box) => {
     console.log(box)
     setBox(box);
@@ -77,8 +82,24 @@ function App() {
         Clarifai.FACE_DETECT_MODEL,
         input)
       .then(response => {
-        console.log(response)
-          displayFaceBox(calculateFaceLocation(response));
+        if(response){
+          fetch('http://localhost:3001/image', {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: user.id
+            })
+          })
+          .then(response => response.json())
+          .then(count => {
+            console.log(count);
+            setUser({
+              entries: count
+            })
+          })
+        }
+        // console.log(response)
+          return displayFaceBox(calculateFaceLocation(response));
           // console.log(response.outputs[0].data.regions[0].region_info.bounding_box)
         })
       .catch(err => console.log(err))
@@ -93,6 +114,25 @@ function App() {
     setRoute(route);
   }
 
+  const loadUser = (data) => {
+    console.log(data);
+    setUser({
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.joined,
+    });
+    // setUser({user: {
+    //   id: data.id,
+    //   name: data.name,
+    //   email: data.email,
+    //   entries: data.entries,
+    //   joined: data.joined,
+    // }});
+    console.log(user);
+  }
+
   return (
     <div className="App">
       <Particles 
@@ -103,14 +143,14 @@ function App() {
       {route === 'home' 
         ? <>
             <Logo/> 
-            <Rank />
+            <Rank user={user}/>
             <ImageForm onInputChange={onInputChange} onSubmit={onSubmit}/>
             <FaceRecognition box={box} imageUrl={imageUrl}/>
           </>
         : (route === 'signin' 
             ? 
-              <Signin onRouteChange={onRouteChange}/> 
-              : <Register onRouteChange={onRouteChange}/>
+              <Signin onRouteChange={onRouteChange} loadUser={loadUser}/> 
+              : <Register onRouteChange={onRouteChange} loadUser={loadUser}/>
         )
       }
     </div>

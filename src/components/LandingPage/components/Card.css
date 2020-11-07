@@ -1,0 +1,24 @@
+.section {
+    flex-flow: row wrap;
+    width: 80%;
+    display: flex;
+    flex-direction: row wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .section > div {
+    padding: 30px;
+  }
+  
+  .small-div {
+    width: 50%;
+  }
+  
+  .big-div {
+    width: 80%;
+  }
+  
+  .bg-grey {
+    background-color: #f6f6f6;
+  }

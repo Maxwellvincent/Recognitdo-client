@@ -1,5 +1,6 @@
 import Clarifai from 'clarifai';
 import React, {useState, useEffect} from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Nav from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageForm from './components/ImageForm/ImageForm';
@@ -10,6 +11,7 @@ import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register'
 import config from './config';
 import './App.css';
+import LandingPage from './components/LandingPage/LandingPage';
 
 // Checking API
 
@@ -135,24 +137,59 @@ function App() {
 
   return (
     <div className="App">
-      <Particles 
-        className="particles" 
-        params={particleOptions}
-      />
-      <Nav isSignedIn={isSignedIn} onRouteChange={onRouteChange}/>
-      {route === 'home' 
-        ? <>
-            <Logo/> 
-            <Rank user={user}/>
-            <ImageForm onInputChange={onInputChange} onSubmit={onSubmit}/>
-            <FaceRecognition box={box} imageUrl={imageUrl}/>
-          </>
-        : (route === 'signin' 
-            ? 
-              <Signin onRouteChange={onRouteChange} loadUser={loadUser}/> 
-              : <Register onRouteChange={onRouteChange} loadUser={loadUser}/>
-        )
-      }
+      <Router>
+        {/* <Particles 
+          className="particles" 
+          params={particleOptions}
+        /> */}
+        {/* <Nav isSignedIn={isSignedIn} onRouteChange={onRouteChange}/> */}
+        <Route exact path="/" component={LandingPage}/>
+        <Route exact path="/home" render={props => 
+            <div>
+              <Particles className="particles" params={particleOptions}/>
+              <Logo/>
+              <Rank user={user}/>
+              <ImageForm onInputChange={onInputChange} onSubmit={onSubmit}/>
+              FaceRecognition: <FaceRecognition box={box} imageUrl={imageUrl}/>
+            </div>
+          } 
+
+                // components={{
+                // Particles: <Particles className="particles" params={particleOptions}/>,
+                // Logo: <Logo/>, 
+                // Rank: <Rank user={user}/>,
+                // ImageForm: <ImageForm onInputChange={onInputChange} onSubmit={onSubmit}/>,
+                // FaceRecognition: <FaceRecognition box={box} imageUrl={imageUrl}/>
+                // }}
+        />
+        <Route exact path="/signin" render={props => 
+                <div>
+                    <Particles className="particles" params={particleOptions}/>
+                    <Signin onRouteChange={onRouteChange} loadUser={loadUser}/>
+                </div>
+                }
+        />
+        <Route exact path="/register" render={props => 
+                <div>
+                    <Particles className="particles" params={particleOptions}/>
+                    <Register onRouteChange={onRouteChange} loadUser={loadUser}/>
+                </div>
+                }
+        />
+          {/* {route === 'home' 
+            ? <>
+                <Logo/> 
+                <Rank user={user}/>
+                <ImageForm onInputChange={onInputChange} onSubmit={onSubmit}/>
+                <FaceRecognition box={box} imageUrl={imageUrl}/>
+              </>
+            : (route === 'signin' 
+                ? 
+                  <Signin onRouteChange={onRouteChange} loadUser={loadUser}/> 
+                  : <Register onRouteChange={onRouteChange} loadUser={loadUser}/>
+            )
+          } */}
+      </Router>
     </div>
   );
 

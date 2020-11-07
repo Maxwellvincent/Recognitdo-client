@@ -13,9 +13,9 @@ const Signin = ({ onRouteChange, loadUser, user }) => {
         setSignInPassword(e.target.value);
     }
 
-    const onSubmitSignIn = () => {
+    const onSubmitSignIn = async () => {
         // run a fetch to server
-        fetch('http://localhost:3001/signin', {
+        await fetch('http://localhost:3001/signin', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -25,10 +25,11 @@ const Signin = ({ onRouteChange, loadUser, user }) => {
         })
         .then(resp => resp.json())
         .then(user => {
+            console.log(user);
             console.log(user.id);
             if(user.id){
                 loadUser(user);
-                onRouteChange('home');
+                // onRouteChange('home');
             }
         })
         console.log(signInEmail, signInPassword);

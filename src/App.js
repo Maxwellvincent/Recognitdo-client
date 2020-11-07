@@ -48,7 +48,7 @@ function App() {
   });
 
   useEffect(() => {
-    fetch('http://localhost:3001')
+    fetch('http://localhost:3001/api/')
     .then(resp => resp.json())
     .then(console.log)
   })

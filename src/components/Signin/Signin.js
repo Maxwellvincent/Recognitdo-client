@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 import './Signin.css';
 
 const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
@@ -80,8 +80,13 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                             />
                         </div>
                         <div className="lh-copy mt3">
-                            <p onClick={() => onRouteChange('register')}
-                                className="f6 link dim black db pointer">Register</p>
+                            <Link to="/register" >
+                                <p onClick={() => onRouteChange('register')}
+                                    className="f6 link dim black db pointer">
+                                    Register
+                                </p>
+                            </Link> 
+                            
                             
                         </div>
                 </section>

@@ -20,7 +20,9 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
         // run a fetch to server
         fetch('https://rocky-oasis-94549.herokuapp.com/signin', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'},
             body: JSON.stringify({
                 email: signInEmail,
                 password: signInPassword

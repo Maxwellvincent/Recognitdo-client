@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import {useHistory} from 'react-router-dom';
+
 
 const Register = ({ onRouteChange, loadUser }) => {
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
     const [registerName, setRegisterName] = useState('');
+    const history = useHistory();
 
     const onEmailChange = (e) => {
         setRegisterEmail(e.target.value);
@@ -38,6 +41,7 @@ const Register = ({ onRouteChange, loadUser }) => {
                 console.log(user);
                 loadUser(user);
                 onRouteChange('home')
+                history.push('/home');
             }
         })
         console.log(registerName, registerPassword, registerEmail);

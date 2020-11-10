@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import './Signin.css';
 
-const Signin = ({ onRouteChange, loadUser, user }) => {
+const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
+    const history = useHistory();
 
     const onEmailChange = (e) => {
         setSignInEmail(e.target.value);
@@ -13,9 +15,10 @@ const Signin = ({ onRouteChange, loadUser, user }) => {
         setSignInPassword(e.target.value);
     }
 
-    const onSubmitSignIn = async () => {
+    const onSubmitSignIn = () => {
+        // console.log("this is clicking!")
         // run a fetch to server
-        await fetch('http://localhost:3001/signin', {
+        fetch('http://localhost:3001/signin', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -25,14 +28,16 @@ const Signin = ({ onRouteChange, loadUser, user }) => {
         })
         .then(resp => resp.json())
         .then(user => {
-            console.log(user);
-            console.log(user.id);
+            // console.log(user);
+            // console.log(user.id);
             if(user.id){
                 loadUser(user);
-                // onRouteChange('home');
+                onRouteChange('home');
+                // isSignedIn(true);
+                history.push('/home');
             }
         })
-        console.log(signInEmail, signInPassword);
+        // console.log(signInEmail, signInPassword);
         
     }
 

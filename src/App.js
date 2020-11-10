@@ -1,6 +1,6 @@
 import Clarifai from 'clarifai';
 import React, {useState, useEffect} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, useHistory } from "react-router-dom";
 import Nav from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageForm from './components/ImageForm/ImageForm';
@@ -46,6 +46,7 @@ function App() {
             entries: 0,
             joined: ''
   });
+  const history = useHistory();
 
   useEffect(() => {
     fetch('http://localhost:3001/api/')
@@ -110,8 +111,12 @@ function App() {
   const onRouteChange = (route) => {
     if(route === 'signout') {
       setIsSignedIn(false)
+      
     } else if(route === 'home'){
       setIsSignedIn(true)
+      
+    } else if (route === 'signin'){
+      setIsSignedIn(false);
     }
     setRoute(route);
   }
@@ -144,14 +149,16 @@ function App() {
         /> */}
         {/* <Nav isSignedIn={isSignedIn} onRouteChange={onRouteChange}/> */}
         <Route exact path="/" component={LandingPage}/>
-        <Route exact path="/home" render={props => 
+        <Route exact path="/home" render={ props => 
             <div>
+              <Nav isSignedIn={isSignedIn} onRouteChange={onRouteChange}/> 
               <Particles className="particles" params={particleOptions}/>
               <Logo/>
               <Rank user={user}/>
               <ImageForm onInputChange={onInputChange} onSubmit={onSubmit}/>
-              FaceRecognition: <FaceRecognition box={box} imageUrl={imageUrl}/>
+              <FaceRecognition box={box} imageUrl={imageUrl}/>
             </div>
+          
           } 
 
                 // components={{

@@ -1,18 +1,22 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import './Navigation.css';
 
 
 const Nav = ({onRouteChange, isSignedIn}) => {
+    const history = useHistory();
 
         if(isSignedIn) {
             return (
                 <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <p className='f3 link dim black underline pa3 pointer' 
+                    <Link to="/signin" >
+                        <p className='f3 link dim black underline pa3 pointer' 
                         onClick={() => onRouteChange('signin')}
-                    >
+                        // onClick={history.push('/signin')}
+                        >
                         Sign Out
-                    </p>
+                        </p>
+                    </Link>
                 </nav>
             )
         } else {
@@ -21,6 +25,7 @@ const Nav = ({onRouteChange, isSignedIn}) => {
                     <Link to="/sigin" >
                         <p className='f3 link dim black underline pa3 pointer' 
                             // onClick={() => onRouteChange('signin')}
+                            onClick={history.push('/signin')}
                         >
                         Sign In
                         </p>

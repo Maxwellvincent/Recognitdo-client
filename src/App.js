@@ -49,7 +49,7 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/')
+    fetch('https://rocky-oasis-94549.herokuapp.com/api/')
     .then(resp => resp.json())
     .then(console.log)
   })
@@ -86,7 +86,7 @@ function App() {
         input)
       .then(response => {
         if(response){
-          fetch('http://localhost:3001/image', {
+          fetch('https://rocky-oasis-94549.herokuapp.com/image', {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

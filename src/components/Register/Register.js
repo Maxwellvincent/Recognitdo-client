@@ -20,7 +20,7 @@ const Register = ({ onRouteChange, loadUser }) => {
     const onSubmitRegister = (e) => {
         e.preventDefault();
         // run a fetch to server
-        fetch('http://localhost:3001/register', {
+        fetch('https://rocky-oasis-94549.herokuapp.com/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

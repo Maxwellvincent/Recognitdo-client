@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useHistory, Link} from 'react-router-dom';
 import './Signin.css';
+import {toast} from 'react-toastify';
 
 const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
     const [signInEmail, setSignInEmail] = useState('');
@@ -15,10 +16,11 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
         setSignInPassword(e.target.value);
     }
 
-    const onSubmitSignIn = () => {
+    const onSubmitSignIn = async (e) => {
+        e.preventDefault();
         // console.log("this is clicking!")
         // run a fetch to server
-        fetch('https://rocky-oasis-94549.herokuapp.com/signin', {
+        await fetch('https://rocky-oasis-94549.herokuapp.com/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,11 +36,14 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
             // console.log(user.id);
             if(user.id){
                 loadUser(user);
+                toast.success("Login Successfully!");
                 onRouteChange('home');
                 // isSignedIn(true);
                 history.push('/home');
+            } else {
+                toast.error("Unsuccesfull login attempt");
             }
-        })
+        });
         // console.log(signInEmail, signInPassword);
         
     }
@@ -47,7 +52,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
         //AS IS THE ENTER BUTTON DOESNT WORK ON SUBMIT BC ITS NOT FORM
         <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">
-                <section className="measure">
+                <form className="measure" style={{"textAlign": "center"}}>
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f1 fw6 ph0 mh0">Sign In</legend>
                         <div className="mt3">
@@ -57,6 +62,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 type="email" 
                                 name="email-address"  
                                 id="email-address"
+                                required
                                 onChange={onEmailChange}    
                             />
                         </div>
@@ -67,6 +73,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 type="password" 
                                 name="password"  
                                 id="password"
+                                required
                                 onChange={onPasswordChange}
                             />
                         </div>
@@ -76,7 +83,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                                 type="submit" 
                                 value="Sign in"
-                                onClick={onSubmitSignIn}
+                                onClick={e => onSubmitSignIn(e)}
                             />
                         </div>
                         <div className="lh-copy mt3">
@@ -90,7 +97,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                             
                             
                         </div>
-                </section>
+                </form>
             </main>
         </article>
         

@@ -5,7 +5,7 @@ function ImageForm({ onInputChange, onSubmit }) {
     return (
         <div>
             <p className="f3">
-                {'This will detect a face in your picture.'}
+                {'Submit an image URL that contains an individuals head in order for our Facial Recognition software to locate a face within the image. As you submit more images the counter will increase.'}
             </p>
             <div className="center">
                 <div className="form center pa4 br3 shadow-5">

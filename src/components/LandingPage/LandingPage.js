@@ -13,7 +13,7 @@ const LandingPage = () => {
                 className="section"
                 img='https://images.unsplash.com/photo-1485796826113-174aa68fd81b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
                 title='About the Company'
-                description='With a focus on face recognition technology we build on the experience gained through hundreds of successful installations worldwide.'
+                description='With a focus on face recognition technology we build on the experience gained through hundreds of successful installations worldwide. With this application you can identify a face within an image. The more images that are identified, a user will see an increase in their number of entries.'
             />
             <Card
                 className="section bg-grey"
@@ -25,12 +25,7 @@ const LandingPage = () => {
                 className="section"
                 // img='./Capture1.PNG'
                 title='How to get started?'
-                description='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                        minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur.'
+                description={<>To test the application sign into the application with <strong>guest@mail.com</strong> and password <strong>123</strong>. Once logged in you can submit an image url of an individuals head, and our facial recognition software with outline a face upon the image.</>}
             />
             <div className="btn-order">
                 <Button route="signin"/>

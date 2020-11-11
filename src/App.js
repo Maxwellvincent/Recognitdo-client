@@ -1,6 +1,8 @@
 import Clarifai from 'clarifai';
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Link, useHistory } from "react-router-dom";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Nav from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageForm from './components/ImageForm/ImageForm';
@@ -14,7 +16,7 @@ import './App.css';
 import LandingPage from './components/LandingPage/LandingPage';
 
 // Checking API
-
+toast.configure();
 const app = new Clarifai.App({
   // apiKey: '710e4185216f486dbfa1fa62118ae660'
   apiKey: `${config.API_KEY}`

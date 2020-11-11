@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {useHistory} from 'react-router-dom';
-
+import {toast} from 'react-toastify';
 
 const Register = ({ onRouteChange, loadUser }) => {
     const [registerEmail, setRegisterEmail] = useState('');
@@ -39,9 +39,12 @@ const Register = ({ onRouteChange, loadUser }) => {
         .then(user => {
             if(user){
                 console.log(user);
+                toast.success("Login Successfully!");
                 loadUser(user);
                 onRouteChange('home')
                 history.push('/home');
+            } else {
+                toast.error("User already exists");
             }
         })
         console.log(registerName, registerPassword, registerEmail);
@@ -51,7 +54,7 @@ const Register = ({ onRouteChange, loadUser }) => {
     return (
         <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">
-                <form className="measure">
+                <form className="measure" style={{"textAlign": "center"}}>
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f1 fw6 ph0 mh0">Register</legend>
                         <div className="mt3">
@@ -61,6 +64,7 @@ const Register = ({ onRouteChange, loadUser }) => {
                                 type="text" 
                                 name="name"  
                                 id="name"
+                                required
                                 onChange={onNameChange}    
                             />
                         </div>
@@ -71,6 +75,7 @@ const Register = ({ onRouteChange, loadUser }) => {
                                 type="email" 
                                 name="email-address"  
                                 id="email-address"
+                                required
                                 onChange={onEmailChange}    
                             />
                         </div>
@@ -81,6 +86,7 @@ const Register = ({ onRouteChange, loadUser }) => {
                                 type="password" 
                                 name="password"  
                                 id="password"
+                                required
                                 onChange={onPasswordChange}
                             />
                         </div>
@@ -90,7 +96,7 @@ const Register = ({ onRouteChange, loadUser }) => {
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                                 type="submit" 
                                 value="Register"
-                                onClick={onSubmitRegister}
+                                onClick={e => onSubmitRegister(e)}
                             />
                         </div>
                         {/* <div className="lh-copy mt3">

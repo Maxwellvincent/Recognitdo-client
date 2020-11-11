@@ -83,7 +83,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                                 type="submit" 
                                 value="Sign in"
-                                onClick={e => onSubmitSignIn(e)}
+                                onSubmit={e => onSubmitSignIn(e)}
                             />
                         </div>
                         <div className="lh-copy mt3">

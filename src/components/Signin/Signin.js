@@ -2,11 +2,14 @@ import React, {useState} from 'react';
 import {useHistory, Link} from 'react-router-dom';
 import './Signin.css';
 import {toast} from 'react-toastify';
+import {useForm} from 'react-hook-form';
 
 const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
+    const {register, handleSubmit, watch, errors} = useForm();
     const history = useHistory();
+
 
     const onEmailChange = (e) => {
         setSignInEmail(e.target.value);
@@ -52,19 +55,20 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
         //AS IS THE ENTER BUTTON DOESNT WORK ON SUBMIT BC ITS NOT FORM
         <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">
-                <form className="measure" style={{"textAlign": "center"}}>
+                <form className="measure" style={{"textAlign": "center"}} onSubmit={handleSubmit()}>
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f1 fw6 ph0 mh0">Sign In</legend>
                         <div className="mt3">
-                            <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
+                            <label className="db fw6 lh-copy f6" htmlFor="email">Email</label>
                             <input 
                                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="email" 
-                                name="email-address"  
-                                id="email-address"
-                                required
+                                name="email"  
+                                id="email"
+                                ref={register({required:true})}
                                 onChange={onEmailChange}    
                             />
+                            {errors.email && <span>This field is required</span>}
                         </div>
                         <div className="mv3">
                             <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
@@ -73,9 +77,10 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 type="password" 
                                 name="password"  
                                 id="password"
-                                required
+                                ref={register({required:true})}
                                 onChange={onPasswordChange}
                             />
+                            {errors.password && <span>This field is required</span>}
                         </div>
                         </fieldset>
                         <div className="">
@@ -83,19 +88,27 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                                 type="submit" 
                                 value="Sign in"
-                                onSubmit={e => onSubmitSignIn(e)}
+                                // onSubmit={e => onSubmitSignIn(e)}
+                                onSubmit={e => handleSubmit(onSubmitSignIn(e))}
                             />
                         </div>
                         <div className="lh-copy mt3">
-                            <Link to="/register" >
+                            <Link to="/register" style={{"textDecoration": "none", "cursor": "pointer"}}>
                                 <p 
                                     // onClick={() => onRouteChange('register')}
                                     className="f6 link dim black db pointer">
                                     Register
                                 </p>
                             </Link> 
-                            
-                            
+                        </div>
+                        <div className="lh-copy mt3">
+                            <Link to="/" style={{"textDecoration": "none", "cursor": "pointer"}}>
+                                <p 
+                                // onClick={onRouteChange('register')}
+                                className="f6 link dim black db"
+                                > 
+                                Home Page</p>
+                            </Link>
                         </div>
                 </form>
             </main>

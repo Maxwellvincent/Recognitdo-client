@@ -9,7 +9,10 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
     const [signInPassword, setSignInPassword] = useState('');
     const {register, handleSubmit, watch, errors} = useForm();
     const history = useHistory();
-
+    const onSubmit = data => {
+        console.log(data);
+        onSubmitSignIn();
+      };
 
     const onEmailChange = (e) => {
         setSignInEmail(e.target.value);
@@ -19,8 +22,9 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
         setSignInPassword(e.target.value);
     }
 
-    const onSubmitSignIn = async (e) => {
-        e.preventDefault();
+    const onSubmitSignIn = async () => {
+        // e.preventDefault();
+        console.log("this works")
         // console.log("this is clicking!")
         // run a fetch to server
         await fetch('https://rocky-oasis-94549.herokuapp.com/signin', {
@@ -55,7 +59,10 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
         //AS IS THE ENTER BUTTON DOESNT WORK ON SUBMIT BC ITS NOT FORM
         <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">
-                <form className="measure" style={{"textAlign": "center"}} onSubmit={handleSubmit()}>
+                <form className="measure" 
+                    style={{"textAlign": "center"}} 
+                    onSubmit={handleSubmit(onSubmit)}
+                    >
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f1 fw6 ph0 mh0">Sign In</legend>
                         <div className="mt3">
@@ -65,6 +72,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 type="email" 
                                 name="email"  
                                 id="email"
+                                required
                                 ref={register({required:true})}
                                 onChange={onEmailChange}    
                             />
@@ -77,6 +85,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 type="password" 
                                 name="password"  
                                 id="password"
+                                required
                                 ref={register({required:true})}
                                 onChange={onPasswordChange}
                             />
@@ -88,8 +97,8 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                                 type="submit" 
                                 value="Sign in"
-                                // onSubmit={e => onSubmitSignIn(e)}
-                                onSubmit={e => handleSubmit(onSubmitSignIn(e))}
+                                // onClick={(e) => onSubmitSignIn(e)}
+                                onSubmit={(e) => onSubmitSignIn(e)}
                             />
                         </div>
                         <div className="lh-copy mt3">

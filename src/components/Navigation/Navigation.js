@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link, useHistory} from 'react-router-dom';
+import {toast} from 'react-toastify';
 import './Navigation.css';
 
 
@@ -11,8 +12,12 @@ const Nav = ({onRouteChange, isSignedIn}) => {
                 <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Link to="/signin" >
                         <p className='f3 link dim black underline pa3 pointer' 
-                        onClick={() => onRouteChange('signin')}
+                        onClick={() => {
+                            toast.success("Logged Successfully!")
+                            onRouteChange('signin')
+                            }}
                         // onClick={history.push('/signin')}
+                        
                         >
                         Sign Out
                         </p>

@@ -79,26 +79,26 @@ function App() {
     setInput(e.target.value)
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log(input);
     setImageUrl(input);
-    app.models
+    await app.models
       .predict(
         Clarifai.FACE_DETECT_MODEL,
         input)
-      .then(response => {
+      .then( async response => {
         if(response){
-          fetch('https://rocky-oasis-94549.herokuapp.com/image', {
+          await fetch('https://rocky-oasis-94549.herokuapp.com/image', {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
               id: user.id
             })
           })
-          .then(response => response.json())
-          .then(count => {
+          .then(async response => response.json())
+          .then(async count => {
             console.log(count);
-            setUser({
+             setUser({
               entries: count
             })
           })
@@ -181,7 +181,7 @@ function App() {
         <Route exact path="/register" render={props => 
                 <div>
                     <Particles className="particles" params={particleOptions}/>
-                    <Register onRouteChange={onRouteChange} loadUser={loadUser}/>
+                    <Register onRouteChange={onRouteChange} loadUser={loadUser} isSignedIn={isSignedIn}/>
                 </div>
                 }
         />

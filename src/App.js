@@ -48,6 +48,7 @@ function App() {
             entries: 0,
             joined: ''
   });
+
   const history = useHistory();
 
   useEffect(() => {
@@ -97,10 +98,12 @@ function App() {
           })
           .then(async response => response.json())
           .then(async count => {
+            console.log("This works 1")
             console.log(count);
-             setUser({
-              entries: count
-            })
+            user.entries = count;
+            //  setUser({
+            //   entries: count
+            // })
           })
         }
         // console.log(response)

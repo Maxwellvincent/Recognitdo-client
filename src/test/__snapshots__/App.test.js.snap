@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App/> renders the App component correctly 1`] = `
+<div
+  className="App"
+>
+  <BrowserRouter>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      exact={true}
+      path="/home"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/signin"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/register"
+      render={[Function]}
+    />
+  </BrowserRouter>
+</div>
+`;
+
+exports[`<App/> renders the enzyme correctly 1`] = `
+<div
+  className="App"
+>
+  <BrowserRouter>
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      exact={true}
+      path="/home"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/signin"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/register"
+      render={[Function]}
+    />
+  </BrowserRouter>
+</div>
+`;

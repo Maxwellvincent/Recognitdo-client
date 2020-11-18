@@ -1,6 +1,6 @@
 .section {
     flex-flow: row wrap;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: row wrap;
     align-items: center;

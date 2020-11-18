@@ -10,7 +10,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
     const {register, handleSubmit, watch, errors} = useForm();
     const history = useHistory();
     const onSubmit = data => {
-        console.log(data);
+       
         onSubmitSignIn();
       };
 
@@ -24,8 +24,6 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
 
     const onSubmitSignIn = async () => {
         // e.preventDefault();
-        console.log("this works")
-        // console.log("this is clicking!")
         // run a fetch to server
         await fetch('https://rocky-oasis-94549.herokuapp.com/signin', {
             method: 'POST',
@@ -39,8 +37,6 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
         })
         .then(resp => resp.json())
         .then(user => {
-            // console.log(user);
-            // console.log(user.id);
             if(user.id){
                 loadUser(user);
                 toast.success("Login Successfully!");
@@ -51,7 +47,6 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                 toast.error("Unsuccesfull login attempt");
             }
         });
-        // console.log(signInEmail, signInPassword);
         
     }
 

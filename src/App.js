@@ -1,6 +1,6 @@
 import Clarifai from 'clarifai';
 import React, {useState, useEffect} from 'react';
-import { BrowserRouter as Router, Route, Link, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Nav from './components/Navigation/Navigation';
@@ -49,12 +49,11 @@ function App() {
             joined: ''
   });
 
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     fetch('https://rocky-oasis-94549.herokuapp.com/api/')
     .then(resp => resp.json())
-    .then(console.log)
   })
 
   const calculateFaceLocation = (data) => {
@@ -71,7 +70,6 @@ function App() {
   }
 
   const displayFaceBox = (box) => {
-    console.log(box)
     setBox(box);
   }
 
@@ -81,7 +79,6 @@ function App() {
   };
 
   const onSubmit = async () => {
-    console.log(input);
     setImageUrl(input);
     await app.models
       .predict(
@@ -98,19 +95,15 @@ function App() {
           })
           .then(async response => response.json())
           .then(async count => {
-            console.log("This works 1")
-            console.log(count);
             user.entries = count;
             //  setUser({
             //   entries: count
             // })
           })
         }
-        // console.log(response)
           return displayFaceBox(calculateFaceLocation(response));
-          // console.log(response.outputs[0].data.regions[0].region_info.bounding_box)
         })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   const onRouteChange = (route) => {
@@ -127,7 +120,6 @@ function App() {
   }
 
   const loadUser = (data) => {
-    console.log(data);
     setUser({
       id: data.id,
       name: data.name,
@@ -142,7 +134,6 @@ function App() {
     //   entries: data.entries,
     //   joined: data.joined,
     // }});
-    console.log(user);
   }
 
   return (

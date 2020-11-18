@@ -10,7 +10,6 @@ const Register = ({ onRouteChange, loadUser,isSignedIn }) => {
     const {register, handleSubmit, watch, errors} = useForm();
     const history = useHistory();
     const onSubmit = data => {
-        console.log(data);
         onSubmitRegister()
       }; 
 
@@ -28,7 +27,6 @@ const Register = ({ onRouteChange, loadUser,isSignedIn }) => {
 
     const onSubmitRegister = async() => {
         // e.preventDefault();
-        console.log("this is running");
         // run a fetch to server
         await fetch('https://rocky-oasis-94549.herokuapp.com/register', {
             method: 'POST',
@@ -44,9 +42,9 @@ const Register = ({ onRouteChange, loadUser,isSignedIn }) => {
         })
         .then(resp => resp.json())
         .then(user => {
-            console.log(user)
+            
             if(user !== "unable to register"){
-                console.log(user);
+                
                 toast.success("Registered Successfully!");
                 loadUser(user);
                 onRouteChange('home')
@@ -56,7 +54,6 @@ const Register = ({ onRouteChange, loadUser,isSignedIn }) => {
                 toast.error("User already exists");
             }
         })
-        // console.log(registerName, registerPassword, registerEmail);
         
     }
 

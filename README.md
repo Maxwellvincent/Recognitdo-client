@@ -1,7 +1,7 @@
 FORMAT: 1A
 HOST: https://rocky-oasis-94549.herokuapp.com/
 
-# Recognitdo
+# [Recognitdo] (https://recognitdo-client.vercel.app/)
 
 Recognitdo is a simple Restful facial detection api, that allows users to submit image urls, that will allows the application to detect a face withing the image, and generate a box surrounding the face.
 Users are able to login/signUp, create an account, submit images to a PSQL database, which updates the users entries upon submission of the image. 

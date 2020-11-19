@@ -12,7 +12,8 @@
   }
   
   .small-div {
-    width: 50%;
+    /* width: 80%; */
+    max-width: 800px;
   }
   
   .big-div {

@@ -1,68 +1,90 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FORMAT: 1A
+HOST: https://rocky-oasis-94549.herokuapp.com/
 
-## Available Scripts
+# Recognitdo
 
-In the project directory, you can run:
+Recognitdo is a simple Restful facial detection api, that allows users to submit image urls, that will allows the application to detect a face withing the image, and generate a box surrounding the face.
+Users are able to login/signUp, create an account, submit images to a PSQL database, which updates the users entries upon submission of the image. 
 
-### `npm start`
+## Built With
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+ - Node - Run-time environment
+ - Express - Web application framework
+ - PSQL - Database
+ - JWT - Authentication
+ - Mocha - Testing
+ - Chai - Testing
+ - Clarafai API - Facial Recognition API
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+## Sign-In [/signin]
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Sign-In defalut user Endpoint [GET]
 
-### `npm run build`
+You may login using the default guest account, which sends a JSON object, containing a email, and password. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
++ Request (application/json)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+        {
+            "email": "guest@mail.com",
+            "password": "123"
+        }
+        
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
++ Response 200 (application/json)
 
-### `npm run eject`
+    + Body
+    
+            {
+                    "id": 1,
+                    "name": "guest",
+                    "email": "guest@mail.com",
+                    "entries": "13",
+                    "joined": "2020-11-10T06:36:57.284Z"
+            }
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Register [/register]
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Register Endpoint [POST]
+You may register and create a new account using this endpoint. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
++ Request (application/json)
 
-## Learn More
+        {
+            "email": "guest@mail.com",
+            "password": "123"
+        }
+        
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
++ Response 200 (application/json)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Image Endpoint [/image]
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+### Send an Image to update the users entries [PUT]
 
-### Making a Progressive Web App
+The request contains a JSON object containing, the users id, and a url image, that is to send to the server.
+Allowing for that users entries to update. 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
++ Request (application/json)
 
-### Advanced Configuration
+        {
+            "email": "gust@email.com",
+            "password": "123",
+            "id": 1
+        }
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
++ Response 201 (application/json)
 
-### Deployment
+    + Headers
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+           
 
-### `npm run build` fails to minify
+    + Body
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+            [
+                "14"
+            ]

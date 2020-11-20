@@ -16,20 +16,8 @@ button {
 }
 
 code {
-  /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace; */
+
     font-family: 'Share Tech', sans-serif;
 }
 
-/* @media screen and (max-width: 300px) {
-  body {
-    margin: 0;
-    font-family: 'Commissioner', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(172,231,239,1) 35%, rgba(0,212,255,1) 100%);
-    font-family: 'Share Tech', sans-serif;
-    font-size: larger;
-  }
-} */
+

@@ -58,7 +58,8 @@
 }
 
 .white {
-    color: #fff;
+    /* color: #fff; */
+    color: #1c1c1c;
 }
 
 .bg-purple {

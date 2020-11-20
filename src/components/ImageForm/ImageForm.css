@@ -85,3 +85,10 @@
     padding-top: .5rem; 
     padding-bottom: .5rem; 
 }
+
+@media screen and (min-width: 600px) {
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+  }

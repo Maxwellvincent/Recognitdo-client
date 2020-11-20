@@ -80,7 +80,7 @@ const Register = ({ onRouteChange, loadUser,isSignedIn }) => {
                             {errors.name && <span>Name field is required</span>}
                         </div>
                         <div className="mt3">
-                            <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
+                            <label className="db fw6 lh-copy f6" htmlFor="email">Email</label>
                             <input 
                                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                                 type="email" 

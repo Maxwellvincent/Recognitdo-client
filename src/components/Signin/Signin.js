@@ -7,8 +7,9 @@ import { useForm } from "react-hook-form";
 const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const history = useHistory();
+
   const onSubmit = (data) => {
     onSubmitSignIn();
   };

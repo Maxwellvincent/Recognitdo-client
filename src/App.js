@@ -118,14 +118,11 @@ function App() {
     });
   };
 
+
+
   return (
     <div className="App">
       <Router>
-        {/* <Particles 
-          className="particles" 
-          params={particleOptions}
-        /> */}
-        {/* <Nav isSignedIn={isSignedIn} onRouteChange={onRouteChange}/> */}
         <Route exact path="/" component={LandingPage} />
         <Route
           exact

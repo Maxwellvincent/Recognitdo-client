@@ -23,8 +23,6 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
     }
 
     const onSubmitSignIn = async () => {
-        // e.preventDefault();
-        // run a fetch to server
         await fetch('https://rocky-oasis-94549.herokuapp.com/signin', {
             method: 'POST',
             headers: {
@@ -41,7 +39,6 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                 loadUser(user);
                 toast.success("Login Successfully!");
                 onRouteChange('home');
-                // isSignedIn(true);
                 history.push('/home');
             } else {
                 toast.error("Unsuccesfull login attempt");
@@ -51,7 +48,6 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
     }
 
     return (
-        //AS IS THE ENTER BUTTON DOESNT WORK ON SUBMIT BC ITS NOT FORM
         <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
             <main className="pa4 black-80">
                 <form className="measure" 
@@ -92,14 +88,12 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" 
                                 type="submit" 
                                 value="Sign in"
-                                // onClick={(e) => onSubmitSignIn(e)}
                                 onSubmit={(e) => onSubmitSignIn(e)}
                             />
                         </div>
                         <div className="lh-copy mt3">
                             <Link to="/register" style={{"textDecoration": "none", "cursor": "pointer"}}>
                                 <p 
-                                    // onClick={() => onRouteChange('register')}
                                     className="f6 link dim black db pointer">
                                     Register
                                 </p>
@@ -108,7 +102,6 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
                         <div className="lh-copy mt3">
                             <Link to="/" style={{"textDecoration": "none", "cursor": "pointer"}}>
                                 <p 
-                                // onClick={onRouteChange('register')}
                                 className="f6 link dim black db"
                                 > 
                                 Home Page</p>

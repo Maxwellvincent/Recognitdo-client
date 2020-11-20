@@ -23,7 +23,6 @@ const LandingPage = () => {
             />
             <Card
                 className="section"
-                // img='./Capture1.PNG'
                 title='How to get started?'
                 description={<>To test the application sign into the application with <strong>guest@mail.com</strong> and password <strong>123</strong>. Once logged in you can submit an image url of an individuals head, and our facial recognition software with outline a face upon the image.</>}
             />

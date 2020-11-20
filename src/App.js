@@ -15,10 +15,10 @@ import config from './config';
 import './App.css';
 import LandingPage from './components/LandingPage/LandingPage';
 
-// Checking API
+
 toast.configure();
 const app = new Clarifai.App({
-  // apiKey: '710e4185216f486dbfa1fa62118ae660'
+  
   apiKey: `${config.API_KEY}`
  });
 
@@ -48,8 +48,6 @@ function App() {
             entries: 0,
             joined: ''
   });
-
-  // const history = useHistory();
 
   useEffect(() => {
     fetch('https://rocky-oasis-94549.herokuapp.com/api/')
@@ -96,9 +94,6 @@ function App() {
           .then(async response => response.json())
           .then(async count => {
             user.entries = count;
-            //  setUser({
-            //   entries: count
-            // })
           })
         }
           return displayFaceBox(calculateFaceLocation(response));
@@ -127,13 +122,6 @@ function App() {
       entries: data.entries,
       joined: data.joined,
     });
-    // setUser({user: {
-    //   id: data.id,
-    //   name: data.name,
-    //   email: data.email,
-    //   entries: data.entries,
-    //   joined: data.joined,
-    // }});
   }
 
   return (
@@ -156,14 +144,6 @@ function App() {
             </div>
           
           } 
-
-                // components={{
-                // Particles: <Particles className="particles" params={particleOptions}/>,
-                // Logo: <Logo/>, 
-                // Rank: <Rank user={user}/>,
-                // ImageForm: <ImageForm onInputChange={onInputChange} onSubmit={onSubmit}/>,
-                // FaceRecognition: <FaceRecognition box={box} imageUrl={imageUrl}/>
-                // }}
         />
         <Route exact path="/signin" render={props => 
                 <div>

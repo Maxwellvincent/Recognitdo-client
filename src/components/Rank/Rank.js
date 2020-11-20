@@ -2,7 +2,6 @@ import React from 'react'
 import './Rank.css';
 
 const Rank = ({user}) => {
-  // const {name, entries} = user.user
     return (
         <div>
             <div className='white f3'>

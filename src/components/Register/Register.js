@@ -26,8 +26,6 @@ const Register = ({ onRouteChange, loadUser,isSignedIn }) => {
     }
 
     const onSubmitRegister = async() => {
-        // e.preventDefault();
-        // run a fetch to server
         await fetch('https://rocky-oasis-94549.herokuapp.com/register', {
             method: 'POST',
             headers: {
@@ -48,7 +46,6 @@ const Register = ({ onRouteChange, loadUser,isSignedIn }) => {
                 toast.success("Registered Successfully!");
                 loadUser(user);
                 onRouteChange('home')
-                // isSignedIn(true)
                 history.push('/home');
             } else {
                 toast.error("User already exists");
@@ -126,7 +123,6 @@ const Register = ({ onRouteChange, loadUser,isSignedIn }) => {
                         <div className="lh-copy mt3">
                             <Link to="/" style={{"textDecoration": "none", "cursor": "pointer"}}>
                                 <p 
-                                // onClick={onRouteChange('register')}
                                 className="f6 link dim black db"
                                 > 
                                 Home Page</p>

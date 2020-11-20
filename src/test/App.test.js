@@ -27,21 +27,12 @@ describe('<App/>', () => {
         expect(wrapper);
     });
 
-    // it('renders the signin in component', () => {
-    //     const wrapper = render(<Signin/>);
-    //     expect(wrapper);
-    // });
-
     it('renders the Rank component', () => {
-        //receives username and user.entries components
         const user = {name: "drew", entries: 1}
         const wrapper = render(<Rank user={user}/>)
         expect(wrapper);
     })
 
-
-  
-  
 })
 
 

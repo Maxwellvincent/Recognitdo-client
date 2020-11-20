@@ -16,8 +16,6 @@ const Nav = ({onRouteChange, isSignedIn}) => {
                             toast.success("Logged Successfully!")
                             onRouteChange('signin')
                             }}
-                        // onClick={history.push('/signin')}
-                        
                         >
                         Sign Out
                         </p>
@@ -29,7 +27,6 @@ const Nav = ({onRouteChange, isSignedIn}) => {
                 <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Link to="/sigin" >
                         <p className='f3 link dim black underline pa3 pointer' 
-                            // onClick={() => onRouteChange('signin')}
                             onClick={history.push('/signin')}
                         >
                         Sign In
@@ -37,7 +34,6 @@ const Nav = ({onRouteChange, isSignedIn}) => {
                     </Link>
                     <Link to="/register">
                         <p className='f3 link dim black underline pa3 pointer' 
-                            // onClick={() => onRouteChange('register')}
                         >
                             Register
                         </p>

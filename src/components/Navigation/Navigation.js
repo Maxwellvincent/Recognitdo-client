@@ -3,17 +3,18 @@ import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./Navigation.css";
 
-const Nav = ({ onRouteChange, isLogin }) => {
+const Nav = ({ onRouteChange, isLogin, isAuthenticated, setAuth, logout}) => {
   const history = useHistory();
 
-  if (isLogin) {
+  if (isAuthenticated) {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
         <Link to="/login">
           <p
             className="f3 link dim black underline pa3 pointer"
-            onClick={() => {
-              toast.success("Logged Successfully!");
+            onClick={(e) => {
+              logout(e);
+              toast.success("Logged out Successfully!");
               // onRouteChange("login");
             }}
           >

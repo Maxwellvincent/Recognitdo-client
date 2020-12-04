@@ -17,6 +17,7 @@ import "./App.css";
 import LandingPage from "./components/LandingPage/LandingPage";
 
 toast.configure();
+
 const app = new Clarifai.App({
   apiKey: `${config.API_KEY}`,
 });
@@ -41,11 +42,8 @@ function App() {
   // const [route, setRoute] = useState("login");
   // const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({
-    id: "",
     name: "",
-    email: "",
-    entries: 0,
-    joined: "",
+    entries: "",
   });
 
   const setAuth = (boolean) => {
@@ -58,50 +56,73 @@ function App() {
   //   );
   // });
 
-  // const calculateFaceLocation = (data) => {
-  //   const clarafaiFace =
-  //     data.outputs[0].data.regions[0].region_info.bounding_box;
-  //   const image = document.getElementById("inputImage");
-  //   const width = Number(image.width);
-  //   const height = Number(image.height);
-  //   return {
-  //     leftCol: clarafaiFace.left_col * width,
-  //     topRow: clarafaiFace.top_row * height,
-  //     rightCol: width - clarafaiFace.right_col * width,
-  //     bottomRow: height - clarafaiFace.bottom_row * height,
-  //   };
-  // };
+  async function isAuth(){
+    try {
+      const response = await fetch('http://localhost:3001/auth/is-verify', {
+        method: "GET",
+        headers: {token : localStorage.token}
+      });
 
-  // const displayFaceBox = (box) => {
-  //   setBox(box);
-  // };
+      const parseRes = await response.json();
+      
+      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
-  // const onInputChange = (e) => {
-  //   setInput(e.target.value);
-  // };
+  useEffect(() => {
+    isAuth()
+  })
 
-  // const onSubmit = async () => {
-  //   setImageUrl(input);
-  //   await app.models
-  //     .predict(Clarifai.FACE_DETECT_MODEL, input)
-  //     .then(async (response) => {
-  //       if (response) {
-  //         await fetch("https://rocky-oasis-94549.herokuapp.com/image", {
-  //           method: "PUT",
-  //           headers: { "Content-Type": "application/json" },
-  //           body: JSON.stringify({
-  //             id: user.id,
-  //           }),
-  //         })
-  //           .then(async (response) => response.json())
-  //           .then(async (count) => {
-  //             user.entries = count;
-  //           });
-  //       }
-  //       return displayFaceBox(calculateFaceLocation(response));
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
+  const calculateFaceLocation = (data) => {
+    const clarafaiFace =
+      data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById("inputImage");
+    const width = Number(image.width);
+    const height = Number(image.height);
+    return {
+      leftCol: clarafaiFace.left_col * width,
+      topRow: clarafaiFace.top_row * height,
+      rightCol: width - clarafaiFace.right_col * width,
+      bottomRow: height - clarafaiFace.bottom_row * height,
+    };
+  };
+
+  const displayFaceBox = (box) => {
+    setBox(box);
+  };
+
+  const onInputChange = (e) => {
+    setInput(e.target.value);
+  };
+
+
+
+  const onSubmit = async () => {
+    setImageUrl(input);
+    await app.models
+      .predict(Clarifai.FACE_DETECT_MODEL, input)
+      .then(async (response) => {
+        if (response) {
+          // https://rocky-oasis-94549.herokuapp.com/image
+          await fetch("http://localhost:3001/image", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json",token: localStorage.token },
+            body: JSON.stringify({
+              id: user.id,
+            }),
+          });
+          setInput("");
+            // .then(async (response) => response.json())
+            // .then(async (count) => {
+            //   user.entries = count;
+            // });
+        }
+        return displayFaceBox(calculateFaceLocation(response));
+      })
+      .catch((err) => console.error(err));
+  };
 
   // const onRouteChange = (route) => {
   //   if (route === "logout") {
@@ -136,7 +157,17 @@ function App() {
             path="/dashboard"
             render={props => isAuthenticated ? (
               <div>
-                <Dashboard {...props} setAuth={setAuth} />
+                <Dashboard {...props} 
+                  setAuth={setAuth} 
+                  particleOptions={particleOptions}
+                  onInputChange={onInputChange}
+                  onSubmit={onSubmit}
+                  box={box}
+                  imageUrl={imageUrl}
+                  setUser={setUser}
+                  isAuthenticated={isAuthenticated}
+                  setIsAuthenticated={setIsAuthenticated}
+                  />
                 {/* <Nav isLogin={isLogin} onRouteChange={onRouteChange} />
                 <Particles className="particles" params={particleOptions} />
                 <Logo />

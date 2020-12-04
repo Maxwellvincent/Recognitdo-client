@@ -1,7 +1,7 @@
 import React from "react";
 import "./ImageForm.css";
 
-function ImageForm({ onInputChange, onSubmit }) {
+function ImageForm({ onInputChange, onSubmit,getName }) {
   return (
     <div>
       <p className="f3">

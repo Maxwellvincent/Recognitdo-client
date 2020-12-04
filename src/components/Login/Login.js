@@ -5,48 +5,71 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
-  const [signInEmail, setSignInEmail] = useState("");
-  const [signInPassword, setSignInPassword] = useState("");
+  // const [signInEmail, setSignInEmail] = useState("");
+  // const [signInPassword, setSignInPassword] = useState("");
   const { register, handleSubmit, errors } = useForm();
   const history = useHistory();
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: ""
+  })
 
-  const onSubmit = (data) => {
-    onSubmitLogin();
+  const {email, password} = inputs;
+
+  const onChange = (e) => {
+    setInputs({...inputs, [e.target.name]: e.target.value})
+  }
+
+  const onSubmit = (data,e) => {
+    onSubmitLogin(e);
   };
 
-  const onEmailChange = (e) => {
-    setSignInEmail(e.target.value);
-  };
+  // const onEmailChange = (e) => {
+  //   setSignInEmail(e.target.value);
+  // };
 
-  const onPasswordChange = (e) => {
-    setSignInPassword(e.target.value);
-  };
+  // const onPasswordChange = (e) => {
+  //   setSignInPassword(e.target.value);
+  // };
 
-  const onSubmitLogin = async () => {
+  const onSubmitLogin = async (e) => {
+    e.preventDefault();
     // http://localhost:3001/auth/login
     // https://rocky-oasis-94549.herokuapp.com/login
-    await fetch("http://localhost:3001/auth/login", {
+
+    try {
+      const body = {email, password};
+
+      const response = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({
-        email: signInEmail,
-        password: signInPassword,
-      }),
+      body: JSON.stringify(body)
     })
-      .then((resp) => resp.json())
-      .then((user) => {
-        if (user.id) {
-          loadUser(user);
-          toast.success("Login Successfully!");
-          // onRouteChange("dashboard");
-          history.push("/dashboard");
-        } else {
-          toast.error("Unsuccesfull login attempt");
-        }
-      });
+
+    const parseRes = await response.json();
+
+    localStorage.setItem("token", parseRes.token);
+
+    setAuth(true);
+      // .then((resp) => resp.json())
+      // .then((user) => {
+      //   if (user.id) {
+      //     loadUser(user);
+      //     toast.success("Login Successfully!");
+      //     // onRouteChange("dashboard");
+      //     history.push("/dashboard");
+      //   } else {
+      //     toast.error("Unsuccesfull login attempt");
+      //   }
+      // });
+
+    } catch (err) {
+      console.error(err.message);
+    }
+
   };
 
   return (
@@ -69,8 +92,10 @@ const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
                 name="email"
                 id="email"
                 required
+                value={email}
                 ref={register({ required: true })}
-                onChange={onEmailChange}
+                // onChange={onEmailChange}
+                onChange={e => onChange(e)}
               />
               {errors.email && <span>This field is required</span>}
             </div>
@@ -84,8 +109,10 @@ const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
                 name="password"
                 id="password"
                 required
+                value={password}
                 ref={register({ required: true })}
-                onChange={onPasswordChange}
+                // onChange={onPasswordChange}
+                onChange={e => onChange(e)}
               />
               {errors.password && <span>This field is required</span>}
             </div>

@@ -3,21 +3,21 @@ import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./Navigation.css";
 
-const Nav = ({ onRouteChange, isSignedIn }) => {
+const Nav = ({ onRouteChange, isLogin }) => {
   const history = useHistory();
 
-  if (isSignedIn) {
+  if (isLogin) {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Link to="/signin">
+        <Link to="/login">
           <p
             className="f3 link dim black underline pa3 pointer"
             onClick={() => {
               toast.success("Logged Successfully!");
-              onRouteChange("signin");
+              // onRouteChange("login");
             }}
           >
-            Sign Out
+            Log Out
           </p>
         </Link>
       </nav>
@@ -25,12 +25,12 @@ const Nav = ({ onRouteChange, isSignedIn }) => {
   } else {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Link to="/sigin">
+        <Link to="/login">
           <p
             className="f3 link dim black underline pa3 pointer"
-            onClick={history.push("/signin")}
+            onClick={history.push("/login")}
           >
-            Sign In
+            Login
           </p>
         </Link>
         <Link to="/register">

@@ -6,7 +6,7 @@ import Enzyme, { shallow, render, mount } from "enzyme";
 import toJson from "enzyme-to-json";
 import Adapter from "enzyme-adapter-react-16";
 import ImageForm from "../components/ImageForm/ImageForm";
-import Signin from "../components/Signin/Signin";
+import Login from "../components/Login/Login";
 import Rank from "../components/Rank/Rank";
 
 describe("<App/>", () => {

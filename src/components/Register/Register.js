@@ -3,52 +3,80 @@ import { useHistory, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
-const Register = ({ onRouteChange, loadUser, isSignedIn }) => {
+const Register = ({ onRouteChange, loadUser, isLogin, setAuth }) => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerName, setRegisterName] = useState("");
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const history = useHistory();
-  const onSubmit = (data) => {
-    onSubmitRegister();
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+    name: ""
+  })
+
+  const {email, password, name} = inputs;
+
+  const onChange = (e) => {
+    setInputs({...inputs,[e.target.name] : e.target.value});
+  }
+
+  const onSubmit = (data,e) => {
+    onSubmitRegister(e);
   };
 
-  const onEmailChange = (e) => {
-    setRegisterEmail(e.target.value);
-  };
+  // const onEmailChange = (e) => {
+  //   setRegisterEmail(e.target.value);
+  // };
 
-  const onNameChange = (e) => {
-    setRegisterName(e.target.value);
-  };
+  // const onNameChange = (e) => {
+  //   setRegisterName(e.target.value);
+  // };
 
-  const onPasswordChange = (e) => {
-    setRegisterPassword(e.target.value);
-  };
+  // const onPasswordChange = (e) => {
+  //   setRegisterPassword(e.target.value);
+  // };
 
-  const onSubmitRegister = async () => {
-    await fetch("https://rocky-oasis-94549.herokuapp.com/register", {
+  const onSubmitRegister = async (e) => {
+    e.preventDefault()
+    // "http://localhost:3001/auth/register"
+    // "https://rocky-oasis-94549.herokuapp.com/register"
+
+    try {
+
+      const body = {email, password, name};
+      const response = await fetch("http://localhost:3001/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({
-        email: registerEmail,
-        password: registerPassword,
-        name: registerName,
-      }),
+      body: JSON.stringify(body)
     })
-      .then((resp) => resp.json())
-      .then((user) => {
-        if (user !== "unable to register") {
-          toast.success("Registered Successfully!");
-          loadUser(user);
-          onRouteChange("home");
-          history.push("/home");
-        } else {
-          toast.error("User already exists");
-        }
-      });
+
+    const parseRes = await response.json();
+
+
+      // .then((resp) => resp.json())
+      // .then((user) => {
+      //   if (user !== "unable to register") {
+      //     toast.success("Registered Successfully!");
+      //     loadUser(user);
+      //     onRouteChange("dashboard");
+      //     history.push("/dashboard");
+      //   } else {
+      //     toast.error("User already exists");
+      //   }
+      // });
+
+    localStorage.setItem('token', parseRes.token);
+
+    setAuth(true);
+
+    } catch (err) {
+      console.error(err.message);
+    }
+  
   };
 
   return (
@@ -72,7 +100,8 @@ const Register = ({ onRouteChange, loadUser, isSignedIn }) => {
                 id="name"
                 required
                 ref={register({ required: true })}
-                onChange={onNameChange}
+                // onChange={onNameChange}
+                onChange={onChange}
               />
               {errors.name && <span>Name field is required</span>}
             </div>
@@ -87,7 +116,8 @@ const Register = ({ onRouteChange, loadUser, isSignedIn }) => {
                 id="email"
                 required
                 ref={register({ required: true })}
-                onChange={onEmailChange}
+                // onChange={onEmailChange}
+                onChange={onChange}
               />
               {errors.email && <span>Email field is required</span>}
             </div>
@@ -102,7 +132,8 @@ const Register = ({ onRouteChange, loadUser, isSignedIn }) => {
                 id="password"
                 required
                 ref={register({ required: true })}
-                onChange={onPasswordChange}
+                // onChange={onPasswordChange}
+                onChange={onChange}
               />
               {errors.email && <span>Password is required</span>}
             </div>
@@ -117,11 +148,11 @@ const Register = ({ onRouteChange, loadUser, isSignedIn }) => {
           </div>
           <div className="lh-copy mt3">
             <Link
-              to="/signin"
+              to="/dashboard"
               style={{ textDecoration: "none", cursor: "pointer" }}
             >
               <p
-                onClick={onRouteChange("signin")}
+                // onClick={onRouteChange("login")}
                 className="f6 link dim black db"
               >
                 Login

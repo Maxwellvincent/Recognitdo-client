@@ -4,7 +4,7 @@ HOST: https://rocky-oasis-94549.herokuapp.com/
 # [Recognitdo](https://recognitdo-client.vercel.app/)
 
 Recognitdo is a simple Restful facial detection api, that allows users to submit image urls, that will allows the application to detect a face withing the image, and generate a box surrounding the face.
-Users are able to login/signUp, create an account, submit images to a PSQL database, which updates the users entries upon submission of the image.
+Users are able to login/register, create an account, submit images to a PSQL database, which updates the users entries upon submission of the image.
 
 ![recognitdoAppImage](https://user-images.githubusercontent.com/44560811/99810128-47902700-2b11-11eb-85a5-8c9ea7443b40.png)
 
@@ -19,9 +19,9 @@ Users are able to login/signUp, create an account, submit images to a PSQL datab
  - Clarafai API - Facial Recognition API
 
 
-## Sign-In [/signin]
+## Login [/login]
 
-### Sign-In defalut user Endpoint [GET]
+### Login defalut user Endpoint [GET]
 
 You may login using the default guest account, which sends a JSON object, containing a email, and password. 
 

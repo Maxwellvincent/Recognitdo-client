@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
-import "./Signin.css";
+import "./Login.css";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
-const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
+const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const { register, handleSubmit, errors } = useForm();
   const history = useHistory();
 
   const onSubmit = (data) => {
-    onSubmitSignIn();
+    onSubmitLogin();
   };
 
   const onEmailChange = (e) => {
@@ -22,8 +22,10 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
     setSignInPassword(e.target.value);
   };
 
-  const onSubmitSignIn = async () => {
-    await fetch("https://rocky-oasis-94549.herokuapp.com/signin", {
+  const onSubmitLogin = async () => {
+    // http://localhost:3001/auth/login
+    // https://rocky-oasis-94549.herokuapp.com/login
+    await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,8 +41,8 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
         if (user.id) {
           loadUser(user);
           toast.success("Login Successfully!");
-          onRouteChange("home");
-          history.push("/home");
+          // onRouteChange("dashboard");
+          history.push("/dashboard");
         } else {
           toast.error("Unsuccesfull login attempt");
         }
@@ -56,7 +58,7 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
           onSubmit={handleSubmit(onSubmit)}
         >
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-            <legend className="f1 fw6 ph0 mh0">Sign In</legend>
+            <legend className="f1 fw6 ph0 mh0">Login</legend>
             <div className="mt3">
               <label className="db fw6 lh-copy f6" htmlFor="email">
                 Email
@@ -92,8 +94,8 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
             <input
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
               type="submit"
-              value="Sign in"
-              onSubmit={(e) => onSubmitSignIn(e)}
+              value="Login"
+              onSubmit={(e) => onSubmitLogin(e)}
             />
           </div>
           <div className="lh-copy mt3">
@@ -115,4 +117,4 @@ const Signin = ({ onRouteChange, loadUser, user, isSignedIn }) => {
   );
 };
 
-export default Signin;
+export default Login;

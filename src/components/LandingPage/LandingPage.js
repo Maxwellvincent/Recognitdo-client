@@ -26,7 +26,7 @@ const LandingPage = () => {
         title="How to get started?"
         description={
           <>
-            To test the application sign into the application with{" "}
+            To test the application Login into the application with{" "}
             <strong>guest@mail.com</strong> and password <strong>123</strong>.
             Once logged in you can submit an image url of an individuals head,
             and our facial recognition software with outline a face upon the
@@ -35,7 +35,7 @@ const LandingPage = () => {
         }
       />
       <div className="btn-order">
-        <Button route="signin" />
+        <Button route="login" />
         <Button route="register" />
       </div>
 

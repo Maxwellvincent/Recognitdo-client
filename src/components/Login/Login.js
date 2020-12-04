@@ -47,7 +47,7 @@ const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
         Accept: "application/json",
       },
       body: JSON.stringify(body)
-    })
+      })
 
     const parseRes = await response.json();
 

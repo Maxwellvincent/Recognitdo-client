@@ -6,7 +6,7 @@ import Logo from '../Logo/Logo';
 import Nav from '../Navigation/Navigation';
 import Rank from '../Rank/Rank';
 
-const Dashboard = ({isLogin, onRouteChange,particleOptions,setUser,setAuth, isAuthenticated, onInputChange,onSubmit,box,imageUrl}) => {
+const Dashboard = ({isLogin, onRouteChange,particleOptions,setUser,setAuth, isAuthenticated, onInputChange,onSubmit,box,imageUrl, loadUser}) => {
   const [userData,setUserData] = useState({
     name: "",
     entries: ""
@@ -21,8 +21,9 @@ const Dashboard = ({isLogin, onRouteChange,particleOptions,setUser,setAuth, isAu
 
       const parseRes = await response.json();
       // console.log(parseRes);
-
+      
       setUserData({name: parseRes.name, entries: parseRes.entries})
+      loadUser(parseRes);
     } catch (err) {
       console.error(err.message);
     }

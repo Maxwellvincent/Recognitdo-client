@@ -113,11 +113,11 @@ function App() {
               id: user.id,
             }),
           });
-          setInput("");
             // .then(async (response) => response.json())
             // .then(async (count) => {
-            //   user.entries = count;
+            //   user.entries = count
             // });
+            setInput("");
         }
         return displayFaceBox(calculateFaceLocation(response));
       })
@@ -135,15 +135,15 @@ function App() {
   //   setRoute(route);
   // };
 
-  // const loadUser = (data) => {
-  //   setUser({
-  //     id: data.id,
-  //     name: data.name,
-  //     email: data.email,
-  //     entries: data.entries,
-  //     joined: data.joined,
-  //   });
-  // };
+  const loadUser = (data) => {
+    setUser({
+      // id: data.id,
+      name: data.name,
+      // email: data.email,
+      entries: data.entries,
+      // joined: data.joined,
+    });
+  };
 
 
 
@@ -157,7 +157,8 @@ function App() {
             path="/dashboard"
             render={props => isAuthenticated ? (
               <div>
-                <Dashboard {...props} 
+                <Dashboard {...props}
+                  loadUser={loadUser} 
                   setAuth={setAuth} 
                   particleOptions={particleOptions}
                   onInputChange={onInputChange}

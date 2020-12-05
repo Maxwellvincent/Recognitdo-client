@@ -113,11 +113,13 @@ function App() {
               id: user.id,
             }),
           });
+          user.entries++
+          
             // .then(async (response) => response.json())
             // .then(async (count) => {
             //   user.entries = count
             // });
-            setInput("");
+            
         }
         return displayFaceBox(calculateFaceLocation(response));
       })
@@ -168,6 +170,7 @@ function App() {
                   setUser={setUser}
                   isAuthenticated={isAuthenticated}
                   setIsAuthenticated={setIsAuthenticated}
+                  user={user}
                   />
                 {/* <Nav isLogin={isLogin} onRouteChange={onRouteChange} />
                 <Particles className="particles" params={particleOptions} />

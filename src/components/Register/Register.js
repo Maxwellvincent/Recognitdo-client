@@ -25,18 +25,6 @@ const Register = ({ onRouteChange, loadUser, isLogin, setAuth }) => {
     onSubmitRegister(e);
   };
 
-  // const onEmailChange = (e) => {
-  //   setRegisterEmail(e.target.value);
-  // };
-
-  // const onNameChange = (e) => {
-  //   setRegisterName(e.target.value);
-  // };
-
-  // const onPasswordChange = (e) => {
-  //   setRegisterPassword(e.target.value);
-  // };
-
   const onSubmitRegister = async (e) => {
     e.preventDefault()
     // "http://localhost:3001/auth/register"
@@ -55,19 +43,6 @@ const Register = ({ onRouteChange, loadUser, isLogin, setAuth }) => {
     })
 
     const parseRes = await response.json();
-
-
-      // .then((resp) => resp.json())
-      // .then((user) => {
-      //   if (user !== "unable to register") {
-      //     toast.success("Registered Successfully!");
-      //     loadUser(user);
-      //     onRouteChange("dashboard");
-      //     history.push("/dashboard");
-      //   } else {
-      //     toast.error("User already exists");
-      //   }
-      // });
 
     localStorage.setItem('token', parseRes.token);
 
@@ -100,7 +75,6 @@ const Register = ({ onRouteChange, loadUser, isLogin, setAuth }) => {
                 id="name"
                 required
                 ref={register({ required: true })}
-                // onChange={onNameChange}
                 onChange={onChange}
               />
               {errors.name && <span>Name field is required</span>}
@@ -116,7 +90,6 @@ const Register = ({ onRouteChange, loadUser, isLogin, setAuth }) => {
                 id="email"
                 required
                 ref={register({ required: true })}
-                // onChange={onEmailChange}
                 onChange={onChange}
               />
               {errors.email && <span>Email field is required</span>}
@@ -132,7 +105,6 @@ const Register = ({ onRouteChange, loadUser, isLogin, setAuth }) => {
                 id="password"
                 required
                 ref={register({ required: true })}
-                // onChange={onPasswordChange}
                 onChange={onChange}
               />
               {errors.email && <span>Password is required</span>}
@@ -152,7 +124,6 @@ const Register = ({ onRouteChange, loadUser, isLogin, setAuth }) => {
               style={{ textDecoration: "none", cursor: "pointer" }}
             >
               <p
-                // onClick={onRouteChange("login")}
                 className="f6 link dim black db"
               >
                 Login

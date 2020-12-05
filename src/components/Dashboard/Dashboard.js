@@ -6,11 +6,8 @@ import Logo from '../Logo/Logo';
 import Nav from '../Navigation/Navigation';
 import Rank from '../Rank/Rank';
 
-const Dashboard = ({isLogin, onRouteChange,particleOptions,setUser, user,setAuth, isAuthenticated, onInputChange,onSubmit,box,imageUrl, loadUser}) => {
-  const [userData,setUserData] = useState({
-    name: "",
-    entries: ""
-  });
+const Dashboard = ({particleOptions,setUser, user,setAuth, isAuthenticated, onInputChange,onSubmit,box,imageUrl, loadUser}) => {
+
 
   async function getName() {
     try {
@@ -20,9 +17,7 @@ const Dashboard = ({isLogin, onRouteChange,particleOptions,setUser, user,setAuth
       });
 
       const parseRes = await response.json();
-      // console.log(parseRes);
       setUser({name: parseRes.name,entries: parseRes.entries})
-      // setUserData({name: parseRes.name, entries: parseRes.entries})
       loadUser(parseRes);
     } catch (err) {
       console.error(err.message);
@@ -37,7 +32,6 @@ const Dashboard = ({isLogin, onRouteChange,particleOptions,setUser, user,setAuth
 
   useEffect(() => {
     getName()
-    // To update the names once submitted i need to implement something here, that will trigger the entries to update. 
   },[])
 
     return (
@@ -48,15 +42,11 @@ const Dashboard = ({isLogin, onRouteChange,particleOptions,setUser, user,setAuth
                 logout={logout}
                 setAuth={setAuth}
                 isAuthenticated={isAuthenticated} 
-                // isLogin={isLogin} 
-                // onRouteChange={onRouteChange} 
                 />
               <Particles className="particles" 
                 params={particleOptions} 
                 />
-              {/* <Logo /> */}
               <Rank 
-                // user={userData} 
                 user={user}  
                 />
               <ImageForm onInputChange={onInputChange} onSubmit={onSubmit} getName={getName}/>

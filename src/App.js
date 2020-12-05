@@ -39,8 +39,6 @@ function App() {
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [box, setBox] = useState({});
-  // const [route, setRoute] = useState("login");
-  // const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({
     name: "",
     entries: "",
@@ -49,12 +47,6 @@ function App() {
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
-
-  // useEffect(() => {
-  //   fetch("https://rocky-oasis-94549.herokuapp.com/api/").then((resp) =>
-  //     resp.json()
-  //   );
-  // });
 
   async function isAuth(){
     try {
@@ -114,36 +106,16 @@ function App() {
             }),
           });
           user.entries++
-          
-            // .then(async (response) => response.json())
-            // .then(async (count) => {
-            //   user.entries = count
-            // });
-            
         }
         return displayFaceBox(calculateFaceLocation(response));
       })
       .catch((err) => console.error(err));
   };
 
-  // const onRouteChange = (route) => {
-  //   if (route === "logout") {
-  //     setIsLogin(false);
-  //   } else if (route === "dashboard") {
-  //     setIsLogin(true);
-  //   } else if (route === "login") {
-  //     setIsLogin(false);
-  //   }
-  //   setRoute(route);
-  // };
-
   const loadUser = (data) => {
     setUser({
-      // id: data.id,
       name: data.name,
-      // email: data.email,
       entries: data.entries,
-      // joined: data.joined,
     });
   };
 
@@ -172,12 +144,6 @@ function App() {
                   setIsAuthenticated={setIsAuthenticated}
                   user={user}
                   />
-                {/* <Nav isLogin={isLogin} onRouteChange={onRouteChange} />
-                <Particles className="particles" params={particleOptions} />
-                <Logo />
-                <Rank user={user} />
-                <ImageForm onInputChange={onInputChange} onSubmit={onSubmit} />
-                <FaceRecognition box={box} imageUrl={imageUrl} /> */}
               </div>
             ) : <Redirect to="/login"/>}
           />
@@ -188,9 +154,8 @@ function App() {
               <div>
                 <Particles className="particles" params={particleOptions} />
                 <Login 
-                  // onRouteChange={onRouteChange} 
-                  // loadUser={loadUser} 
-                  setAuth={setAuth}/>
+                  setAuth={setAuth}
+                  />
               </div>
             ): <Redirect to="/dashboard"/>}
           />
@@ -201,9 +166,6 @@ function App() {
               <div>
                 <Particles className="particles" params={particleOptions} />
                 <Register
-                  // onRouteChange={onRouteChange}
-                  // loadUser={loadUser}
-                  // isLogin={isLogin}
                   setAuth={setAuth}
                 />
               </div>

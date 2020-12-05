@@ -15,7 +15,6 @@ const Nav = ({ onRouteChange, isLogin, isAuthenticated, setAuth, logout}) => {
             onClick={(e) => {
               logout(e);
               toast.success("Logged out Successfully!");
-              // onRouteChange("login");
             }}
           >
             Log Out

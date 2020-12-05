@@ -4,9 +4,7 @@ import "./Login.css";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
-const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
-  // const [signInEmail, setSignInEmail] = useState("");
-  // const [signInPassword, setSignInPassword] = useState("");
+const Login = ({setAuth }) => {
   const { register, handleSubmit, errors } = useForm();
   const history = useHistory();
   const [inputs, setInputs] = useState({
@@ -23,14 +21,6 @@ const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
   const onSubmit = (data,e) => {
     onSubmitLogin(e);
   };
-
-  // const onEmailChange = (e) => {
-  //   setSignInEmail(e.target.value);
-  // };
-
-  // const onPasswordChange = (e) => {
-  //   setSignInPassword(e.target.value);
-  // };
 
   const onSubmitLogin = async (e) => {
     e.preventDefault();
@@ -54,17 +44,6 @@ const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
     localStorage.setItem("token", parseRes.token);
 
     setAuth(true);
-      // .then((resp) => resp.json())
-      // .then((user) => {
-      //   if (user.id) {
-      //     loadUser(user);
-      //     toast.success("Login Successfully!");
-      //     // onRouteChange("dashboard");
-      //     history.push("/dashboard");
-      //   } else {
-      //     toast.error("Unsuccesfull login attempt");
-      //   }
-      // });
 
     } catch (err) {
       console.error(err.message);
@@ -94,7 +73,6 @@ const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
                 required
                 value={email}
                 ref={register({ required: true })}
-                // onChange={onEmailChange}
                 onChange={e => onChange(e)}
               />
               {errors.email && <span>This field is required</span>}
@@ -111,7 +89,6 @@ const Login = ({ onRouteChange, loadUser, user, isLogin,setAuth }) => {
                 required
                 value={password}
                 ref={register({ required: true })}
-                // onChange={onPasswordChange}
                 onChange={e => onChange(e)}
               />
               {errors.password && <span>This field is required</span>}

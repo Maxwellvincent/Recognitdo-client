@@ -3,12 +3,12 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Nav from "./components/Navigation/Navigation";
-import Logo from "./components/Logo/Logo";
-import ImageForm from "./components/ImageForm/ImageForm";
-import Rank from "./components/Rank/Rank";
+// import Nav from "./components/Navigation/Navigation";
+// import Logo from "./components/Logo/Logo";
+// import ImageForm from "./components/ImageForm/ImageForm";
+// import Rank from "./components/Rank/Rank";
 import Particles from "react-particles-js";
-import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
+// import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Dashboard from "./components/Dashboard/Dashboard";
@@ -50,7 +50,7 @@ function App() {
 
   async function isAuth(){
     try {
-      const response = await fetch('http://localhost:3001/auth/is-verify', {
+      const response = await fetch('https://rocky-oasis-94549.herokuapp.com/auth/is-verify', {
         method: "GET",
         headers: {token : localStorage.token}
       });
@@ -98,7 +98,7 @@ function App() {
       .then(async (response) => {
         if (response) {
           // https://rocky-oasis-94549.herokuapp.com/image
-          await fetch("http://localhost:3001/image", {
+          await fetch("https://rocky-oasis-94549.herokuapp.com/image", {
             method: "PUT",
             headers: { "Content-Type": "application/json",token: localStorage.token },
             body: JSON.stringify({

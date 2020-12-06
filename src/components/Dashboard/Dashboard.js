@@ -11,7 +11,7 @@ const Dashboard = ({particleOptions,setUser, user,setAuth, isAuthenticated, onIn
 
   async function getName() {
     try {
-      const response = await fetch("http://localhost:3001/dashboard/", {
+      const response = await fetch("https://rocky-oasis-94549.herokuapp.com/dashboard", {
         method: "GET",
         headers:{token: localStorage.token}
       });

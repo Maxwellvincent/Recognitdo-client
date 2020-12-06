@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 
 const Register = ({ onRouteChange, loadUser, isLogin, setAuth }) => {
-  const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
-  const [registerName, setRegisterName] = useState("");
+  // const [registerEmail, setRegisterEmail] = useState("");
+  // const [registerPassword, setRegisterPassword] = useState("");
+  // const [registerName, setRegisterName] = useState("");
   const { register, handleSubmit, errors } = useForm();
-  const history = useHistory();
+  // const history = useHistory();
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -33,7 +33,7 @@ const Register = ({ onRouteChange, loadUser, isLogin, setAuth }) => {
     try {
 
       const body = {email, password, name};
-      const response = await fetch("http://localhost:3001/auth/register", {
+      const response = await fetch("https://rocky-oasis-94549.herokuapp.com/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

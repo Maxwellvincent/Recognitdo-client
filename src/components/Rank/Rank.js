@@ -5,7 +5,7 @@ const Rank = ({ user }) => {
   return (
     
     <div>
-      <div className="white f3">{`${user.name.toUpperCase()}, you have submited `}</div>
+      <div className="white f3">{`${user.name}, you have submited `}</div>
       <div className="white f1">{`${user.entries} images`}</div>
     </div>
   );

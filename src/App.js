@@ -86,6 +86,7 @@ function App() {
   };
 
   const onInputChange = (e) => {
+    // setInput("");
     setInput(e.target.value);
   };
 
@@ -93,6 +94,7 @@ function App() {
 
   const onSubmit = async () => {
     setImageUrl(input);
+    setInput("");
     await app.models
       .predict(Clarifai.FACE_DETECT_MODEL, input)
       .then(async (response) => {
@@ -138,6 +140,7 @@ function App() {
                   onInputChange={onInputChange}
                   onSubmit={onSubmit}
                   box={box}
+                  input={input}
                   imageUrl={imageUrl}
                   setUser={setUser}
                   isAuthenticated={isAuthenticated}

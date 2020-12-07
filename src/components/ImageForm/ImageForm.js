@@ -1,7 +1,7 @@
 import React from "react";
 import "./ImageForm.css";
 
-function ImageForm({ onInputChange, onSubmit,getName }) {
+function ImageForm({ onInputChange, onSubmit,getName, input }) {
   return (
     <div>
       <p className="f3">
@@ -28,6 +28,7 @@ function ImageForm({ onInputChange, onSubmit,getName }) {
               name="user-img"
               id="user-img"
               onChange={onInputChange}
+              value={input}
             />
           </label>
           <button

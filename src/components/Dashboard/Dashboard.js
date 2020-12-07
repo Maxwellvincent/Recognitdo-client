@@ -1,12 +1,12 @@
-import React, { Fragment, useState,useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Particles from 'react-particles-js';
 import FaceRecognition from '../FaceRecognition/FaceRecognition';
 import ImageForm from '../ImageForm/ImageForm';
-import Logo from '../Logo/Logo';
+// import Logo from '../Logo/Logo';
 import Nav from '../Navigation/Navigation';
 import Rank from '../Rank/Rank';
 
-const Dashboard = ({particleOptions,setUser, user,setAuth, isAuthenticated, onInputChange,onSubmit,box,imageUrl, loadUser}) => {
+const Dashboard = ({particleOptions,setUser, user,setAuth, isAuthenticated, onInputChange,onSubmit,box,imageUrl, loadUser, input}) => {
 
 
   async function getName() {
@@ -32,6 +32,7 @@ const Dashboard = ({particleOptions,setUser, user,setAuth, isAuthenticated, onIn
 
   useEffect(() => {
     getName()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
     return (
@@ -49,7 +50,7 @@ const Dashboard = ({particleOptions,setUser, user,setAuth, isAuthenticated, onIn
               <Rank 
                 user={user}  
                 />
-              <ImageForm onInputChange={onInputChange} onSubmit={onSubmit} getName={getName}/>
+              <ImageForm onInputChange={onInputChange} onSubmit={onSubmit} getName={getName} input={input}/>
               <FaceRecognition box={box} imageUrl={imageUrl} />
             </div>
             
